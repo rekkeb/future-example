@@ -45,15 +45,20 @@ public class FutureController {
 
         Future<String> futureDelay3 = CompletableFuture.supplyAsync(() -> getDelay3(entity));
         Future<String> futureDelay5 = CompletableFuture.supplyAsync(() -> getDelay5(entity));
+        Future<String> futureGet = CompletableFuture.supplyAsync(() -> get(entity));
+        //This request will return a 500 Status code, so the RestTemplate will throw an exception
         Future<String> futureDelayError = CompletableFuture.supplyAsync(() -> getError500(entity));
 
         try {
             result.put("delay3", futureDelay3.get(10, TimeUnit.SECONDS));
             result.put("delay5", futureDelay5.get(10, TimeUnit.SECONDS));
             result.put("error500", futureDelayError.get(10, TimeUnit.SECONDS));
+            result.put("get", futureGet.get(10, TimeUnit.SECONDS)); //This will never be executed due to below Exception
         }catch (Exception e){
             result.put("exception", e.getMessage());
-            LOGGER.error("{}", e);
+            if (LOGGER.isDebugEnabled()){
+                LOGGER.error("{}", e);
+            }
         }
 
         long duration = (System.nanoTime() - start) / 1_000_000;
@@ -68,6 +73,9 @@ public class FutureController {
     }
     private String getDelay5(HttpEntity<?> entity){
         return restTemplate.exchange("http://httpbin.org/delay/5", HttpMethod.GET, entity, String.class).getBody();
+    }
+    private String get(HttpEntity<?> entity){
+        return restTemplate.exchange("http://httpbin.org/", HttpMethod.GET, entity, String.class).getBody();
     }
     private String getError500(HttpEntity<?> entity){
         return restTemplate.exchange("http://httpbin.org/status/500", HttpMethod.GET, entity, String.class).getBody();
