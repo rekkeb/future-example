@@ -1,0 +1,12 @@
+#IntelliJ Files
+/.idea/
+/target/
+*.iml
+
+#Eclipse files
+.project
+.classpath
+.settings
+
+#Mac Files
+.DS_Store
