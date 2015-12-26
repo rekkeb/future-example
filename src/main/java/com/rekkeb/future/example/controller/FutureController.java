@@ -62,7 +62,7 @@ public class FutureController {
         }
 
         long duration = (System.nanoTime() - start) / 1_000_000;
-        LOGGER.info("Done in " + duration + " msecs");
+        LOGGER.info("Done in {} msecs", duration);
 
         return result;
 
