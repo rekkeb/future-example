@@ -20,4 +20,4 @@ try {
 }
 ```
 
-The **futureDelay5** function, takes at least 5 seconds to complete, so the whole code will take at least 5 seconds to complete and process the requests.
+The **getDelay5** function, takes at least 5 seconds to complete, so the whole code will take at least 5 seconds to complete and process the requests.
