@@ -68,6 +68,39 @@ public class FutureController {
 
     }
 
+    @RequestMapping(value = "/future/combine", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public Map<String, String> futureCombined(@RequestHeader HttpHeaders httpHeaders){
+
+        //Lets propagate the received headers
+        httpHeaders.add("vnd.rekkeb.random", String.valueOf(new Random().nextInt(10000)));
+        HttpEntity<?> entity = new HttpEntity<>(httpHeaders);
+
+        HashMap<String,String> result = new HashMap<>();
+
+        long start = System.nanoTime();
+        LOGGER.info("Starting combined requests...");
+
+        CompletableFuture<Map<String, String>> futureDelay =
+            CompletableFuture.supplyAsync(() -> getDelay3(entity))
+                .thenCombine(
+                    CompletableFuture.supplyAsync(() -> getDelay5(entity)),
+                    (delay3, delay5) -> {
+                        result.put("delay3", delay3);
+                        result.put("delay5", delay5);
+                        return result;
+                    }
+                );
+
+        //Is equal than the get() function, but without throwing a checked exception
+        futureDelay.join();
+
+        long duration = (System.nanoTime() - start) / 1_000_000;
+        LOGGER.info("Done in {} msecs", duration);
+
+        return result;
+
+    }
+
     private String getDelay3(HttpEntity<?> entity){
         return restTemplate.exchange("http://httpbin.org/delay/3", HttpMethod.GET, entity, String.class).getBody();
     }
