@@ -1,10 +1,8 @@
 # future-example
 
-This project shows a simple example using Futures in Java 8.
+This project shows a simple example using Futures in Java 8 and Spring Boot.
 
-It is written using Spring Boot.
-
-The code shows some request to a REST service and demonstrates how to make these calls in a non blocking way.
+The code shows how to make multiple requests to a REST service, how to wait the answer of each request and merge all the responses together. Also demonstrates how to make these calls in a non blocking way.
 
 In [FutureController.java](https://github.com/rekkeb/future-example/blob/master/src/main/java/com/rekkeb/future/example/controller/FutureController.java):
 
