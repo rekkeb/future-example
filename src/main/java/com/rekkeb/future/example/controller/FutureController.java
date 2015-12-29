@@ -91,7 +91,7 @@ public class FutureController {
                     }
                 );
 
-        //Is equal than the get() function, but without throwing a checked exception
+        //It's like the get() function, but without throwing a checked exception
         futureDelay.join();
 
         long duration = (System.nanoTime() - start) / 1_000_000;
