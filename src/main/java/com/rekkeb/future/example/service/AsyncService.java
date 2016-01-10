@@ -11,6 +11,8 @@ import org.springframework.web.client.RestTemplate;
 import java.util.concurrent.Future;
 
 /**
+ * Simple service to show the use of @Async and Futures in Java 8
+ *
  * Created by rekkeb on 8/1/16.
  */
 @Service

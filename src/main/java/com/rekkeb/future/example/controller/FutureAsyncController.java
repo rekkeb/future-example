@@ -22,7 +22,7 @@ import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 
 /**
- * Basic RestController to show the use of Futures in Java8 with Lambda functions
+ * Basic RestController to show the use of Futures in Java8 with @Async annotations
  *
  * Created by rekkeb on 26/12/15.
  */
