@@ -6,6 +6,7 @@ The code shows how to make multiple requests to a REST service, how to wait the 
 Also demonstrates how to make these calls in a non blocking way.
 
 It comes in two flavors:
+
 1. Using Spring annotation @Async ([FutureAsyncController.java](https://github.com/rekkeb/future-example/blob/master/src/main/java/com/rekkeb/future/example/controller/FutureAsyncController.java))
 2. Using Plain Java Futures ([FutureController.java](https://github.com/rekkeb/future-example/blob/master/src/main/java/com/rekkeb/future/example/controller/FutureController.java))
 
